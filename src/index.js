@@ -1,10 +1,19 @@
 const API_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "844dba0bfd8f3a4f3799f6130ef9e335";
 
-fetchItems = () => {
-  fetch(`${API_URL}movie/popular?api_key=${API_KEY}&language=es-US&page=1`)
+fetchMovieGenres = () => {
+  fetch(`${API_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`)
     .then((res) => (res.ok ? res.json() : Promise.reject()))
-    .then((json) => console.log(json));
+    .then((json) => console.log("Movie Genres", json));
 };
 
-document.addEventListener("DOMContentLoaded", fetchItems);
+fetchTvGenres = () => {
+  fetch(`${API_URL}genre/tv/list?api_key=${API_KEY}&language=en-US`)
+    .then((res) => (res.ok ? res.json() : Promise.reject()))
+    .then((json) => console.log("TV Genres", json));
+};
+
+document.addEventListener("DOMContentLoaded", (e) => {
+  fetchMovieGenres();
+  fetchTvGenres();
+});
